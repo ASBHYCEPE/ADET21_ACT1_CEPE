@@ -34,6 +34,26 @@ class controller {
     return updatedBal;
   }
 
+  // Function for deposit operation
+  int deposit(var currentBal) {
+    var withdrawAmount;
+    var updatedBal;
+
+    do {
+      stdout.write("Enter an amount to deposit: ");
+      withdrawAmount = stdin.readLineSync();
+
+      if (checkInvalidInput(withdrawAmount)) {
+        print("Integers only!");
+      } else {
+        updatedBal = updateBalance(int.parse(withdrawAmount), currentBal);
+        break;
+      }
+    } while (true);
+
+    return updatedBal;
+  }
+
   int updateBalance(var amount, var currentBal) {
     var updatedBal = amount + currentBal;
     var file = File('balance.txt');
