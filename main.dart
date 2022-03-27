@@ -6,17 +6,27 @@ void main(List<String> args) {
 
   // Gets the current balance value
   var currentBal = control.getCurrentBal();
+  var choice;
 
   print("----------------------------");
   print("- Automated Teller Machine -");
   print("----------------------------");
   print("  Current Balance: $currentBal");
   print("----------------------------");
-  print("- [1] WITHDRAR  [2]DEPOSIT -");
+  print("- [1] WITHDRAW  [2]DEPOSIT -");
   print("- [3] EXIT                 -");
   print("----------------------------");
 
-  var choice = getChoice();
+  do {
+    choice = getChoice();
+    switch (choice) {
+      case 1:
+        control.withdraw(currentBal);
+        break;
+      case 2:
+        break;
+    }
+  } while (choice != 3);
 }
 
 //Function for getting input
