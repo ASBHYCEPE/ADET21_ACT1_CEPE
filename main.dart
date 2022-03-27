@@ -1,10 +1,16 @@
 import 'dart:io';
+import 'controller.dart';
 
 void main(List<String> args) {
+  controller control = new controller();
+
+  // Gets the current balance value
+  var currentBal = control.getCurrentBal();
+
   print("----------------------------");
   print("- Automated Teller Machine -");
   print("----------------------------");
-  print("- Current Balance: P 0     -");
+  print("  Current Balance: $currentBal");
   print("----------------------------");
   print("- [1] WITHDRAR  [2]DEPOSIT -");
   print("- [3] EXIT                 -");
