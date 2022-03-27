@@ -8,10 +8,13 @@ class controller {
   }
 
   // Fucntion for withdrawing operation
-  void withdraw(var currentBal) {
+  int withdraw(var currentBal) {
+    var withdrawAmount;
+    var updatedBal;
+
     do {
       stdout.write("Enter an amount to withdraw: ");
-      var withdrawAmount = stdin.readLineSync();
+      withdrawAmount = stdin.readLineSync();
 
       if (currentBal == 0) {
         print("You can't withdraw with a remaining balance of 0");
@@ -23,9 +26,21 @@ class controller {
       } else if (int.parse(withdrawAmount) > currentBal) {
         print("You have exceeded the allowable amount that can be withdrawn");
       } else {
+        updatedBal = updateBalance(int.parse(withdrawAmount) * -1, currentBal);
         break;
       }
     } while (true);
+
+    return updatedBal;
+  }
+
+  int updateBalance(var amount, var currentBal) {
+    var updatedBal = amount + currentBal;
+    var file = File('balance.txt');
+    var sink = file.openWrite();
+    sink.write(updatedBal.toString());
+    sink.close();
+    return updatedBal;
   }
 
   //Function for checking invalid inputs
