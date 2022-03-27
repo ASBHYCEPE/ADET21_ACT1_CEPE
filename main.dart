@@ -8,20 +8,19 @@ void main(List<String> args) {
   var currentBal = control.getCurrentBal();
   var choice;
 
-  print("----------------------------");
-  print("- Automated Teller Machine -");
-  print("----------------------------");
-  print("  Current Balance: $currentBal");
-  print("----------------------------");
-  print("- [1] WITHDRAW  [2]DEPOSIT -");
-  print("- [3] EXIT                 -");
-  print("----------------------------");
-
   do {
+    print("----------------------------");
+    print("- Automated Teller Machine -");
+    print("----------------------------");
+    print("  Current Balance: $currentBal");
+    print("----------------------------");
+    print("- [1] WITHDRAW  [2]DEPOSIT -");
+    print("- [3] EXIT                 -");
+    print("----------------------------");
     choice = getChoice();
     switch (choice) {
       case 1:
-        control.withdraw(currentBal);
+        currentBal = control.withdraw(currentBal);
         break;
       case 2:
         break;
