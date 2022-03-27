@@ -23,6 +23,7 @@ void main(List<String> args) {
         currentBal = control.withdraw(currentBal);
         break;
       case 2:
+        currentBal = control.deposit(currentBal);
         break;
     }
   } while (choice != 3);
