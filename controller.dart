@@ -72,12 +72,9 @@ class controller {
     return updatedBal;
   }
 
+  //Function for updating the balance
   int updateBalance(var amount, var currentBal) {
     var updatedBal = amount + currentBal;
-    var file = File('balance.txt');
-    var sink = file.openWrite();
-    sink.write(updatedBal.toString());
-    sink.close();
     return updatedBal;
   }
 
