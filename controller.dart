@@ -1,10 +1,20 @@
 import 'dart:io';
+import 'userAccount.dart';
 
 class controller {
   //Fucntion for reading the balance text file
   String readUserAccount() {
-    String content = new File('balance.txt').readAsStringSync();
+    String content = new File('dbAccount.txt').readAsStringSync();
     return content;
+  }
+
+  //Checks login credentials
+  bool checkLogin(var userName, var pin, userAccount account) {
+    if (userName == account.getUserName() && pin == account.getPin()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Fucntion for withdrawing operation
