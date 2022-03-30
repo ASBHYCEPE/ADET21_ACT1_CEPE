@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class userAccount {
   String userName = "";
   String pin = "";
@@ -16,4 +18,18 @@ class userAccount {
   String getUserName() => this.userName;
   String getPin() => this.pin;
   int getCurrentBal() => this.currentBal;
+
+  // Fucntion for updatin the user account
+  void updateUserAccount(userAccount account) {
+    var updatedUserData = account.userName +
+        ' ' +
+        account.pin +
+        ' ' +
+        account.currentBal.toString();
+
+    var file = File('dbAccount.txt');
+    var sink = file.openWrite();
+    sink.write(updatedUserData);
+    sink.close();
+  }
 }
