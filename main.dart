@@ -69,6 +69,7 @@ void transacSection(controller control, userAccount account) {
     }
 
     account.setCurrentBal(currentBal);
+    account.updateUserAccount(account);
   } while (true);
 }
 
