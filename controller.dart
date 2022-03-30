@@ -36,17 +36,17 @@ class controller {
 
   // Function for deposit operation
   int deposit(var currentBal) {
-    var withdrawAmount;
+    var depositAmount;
     var updatedBal;
 
     do {
       stdout.write("Enter an amount to deposit: ");
-      withdrawAmount = stdin.readLineSync();
+      depositAmount = stdin.readLineSync();
 
-      if (checkInvalidInput(withdrawAmount)) {
+      if (checkInvalidInput(depositAmount)) {
         print("Integers only!");
       } else {
-        updatedBal = updateBalance(int.parse(withdrawAmount), currentBal);
+        updatedBal = updateBalance(int.parse(depositAmount), currentBal);
         break;
       }
     } while (true);
