@@ -3,6 +3,7 @@ import 'controller.dart';
 
 void main(List<String> args) {
   controller control = new controller();
+  bankTransac transac;
 
   // Gets the current balance value
   var currentBal = control.getCurrentBal();
@@ -17,20 +18,22 @@ void main(List<String> args) {
     print("- [1] WITHDRAW  [2]DEPOSIT -");
     print("- [3] EXIT                 -");
     print("----------------------------");
-    choice = getChoice();
-    switch (choice) {
-      case 1:
-        currentBal = control.withdraw(currentBal);
+
+    transac = getChoice();
+
+    switch (transac) {
+      case withdraw:
+        currentBal = transac(currentBal, control);
         break;
-      case 2:
-        currentBal = control.deposit(currentBal);
+      case deposit:
+        currentBal = transac(currentBal, control);
         break;
     }
   } while (choice != 3);
 }
 
 //Function for getting input
-int getChoice() {
+bankTransac getChoice() {
   var choice;
 
   do {
@@ -39,8 +42,10 @@ int getChoice() {
 
     if (checkInvalidInput(choice)) {
       print("Not a valid option");
+    } else if (int.parse(choice) == 1) {
+      return withdraw;
     } else {
-      return int.parse(choice); //converts value into integer
+      return deposit;
     }
   } while (true);
 }
@@ -53,3 +58,9 @@ bool checkInvalidInput(var choice) {
     return false;
   }
 }
+
+typedef bankTransac(var currentBal, controller control);
+
+deposit(var currentBal, controller control) => control.deposit(currentBal);
+
+withdraw(var currentBal, controller control) => control.withdraw(currentBal);
