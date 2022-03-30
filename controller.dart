@@ -45,8 +45,8 @@ class controller {
 
       if (checkInvalidInput(depositAmount)) {
         print("Integers only!");
-      } else if (int.parse(depositAmount) < 0) {
-        print("Negative values are not allowed");
+      } else if (int.parse(depositAmount) <= 0) {
+        print("Not a valid input!");
       } else {
         updatedBal = updateBalance(int.parse(depositAmount), currentBal);
         break;
