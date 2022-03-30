@@ -1,13 +1,45 @@
 import 'dart:io';
 import 'controller.dart';
+import 'userAccount.dart';
 
 void main(List<String> args) {
   controller control = new controller();
-  bankTransac transac;
 
-  // Gets the current balance value
-  var currentBal = control.getCurrentBal();
+  var accountDetails = control.readUserAccount().split(' ');
+
+  userAccount account = new userAccount(accountDetails.elementAt(0),
+      accountDetails.elementAt(1), int.parse(accountDetails.elementAt(2)));
+
+  //User Account login
+  loginSection(control, account);
+
+  //Bank Transaction part
+  transacSection(control, account);
+}
+
+void loginSection(controller control, userAccount account) {
+  print("---------------");
+  print("-ACCOUNT LOGIN-");
+  print("---------------");
+
+  do {
+    stdout.write("USERNAME: ");
+    var userName = stdin.readLineSync();
+    stdout.write("PIN: ");
+    var pin = stdin.readLineSync();
+
+    if (control.checkLogin(userName, pin, account)) {
+      return;
+    } else {
+      print("Wrong Credentials!");
+    }
+  } while (true);
+}
+
+void transacSection(controller control, userAccount account) {
+  bankTransac transac;
   var choice;
+  var currentBal = account.getCurrentBal();
 
   do {
     print("----------------------------");
@@ -35,6 +67,8 @@ void main(List<String> args) {
         currentBal = transac(currentBal, control);
         break;
     }
+
+    account.setCurrentBal(currentBal);
   } while (true);
 }
 
