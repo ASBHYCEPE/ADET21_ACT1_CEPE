@@ -19,7 +19,13 @@ void main(List<String> args) {
     print("- [3] EXIT                 -");
     print("----------------------------");
 
-    transac = getChoice();
+    choice = getChoice();
+
+    if (choice == 3) {
+      break;
+    } else {
+      transac = transacType(choice);
+    }
 
     switch (transac) {
       case withdraw:
@@ -29,25 +35,31 @@ void main(List<String> args) {
         currentBal = transac(currentBal, control);
         break;
     }
-  } while (choice != 3);
+  } while (true);
 }
 
 //Function for getting input
-bankTransac getChoice() {
+int getChoice() {
   var choice;
-
   do {
     stdout.write("Enter Operation: ");
     choice = stdin.readLineSync();
 
     if (checkInvalidInput(choice)) {
       print("Not a valid option");
-    } else if (int.parse(choice) == 1) {
-      return withdraw;
     } else {
-      return deposit;
+      return int.parse(choice);
     }
   } while (true);
+}
+
+// Returns the defined function under typeddef bankTransac
+bankTransac transacType(var choice) {
+  if (choice == 1) {
+    return withdraw;
+  } else {
+    return deposit;
+  }
 }
 
 //Function for checking invalid inputs
