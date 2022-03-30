@@ -13,7 +13,7 @@ class controller {
     var updatedBal;
 
     do {
-      stdout.write("Enter an amount to withdraw: ");
+      stdout.write("Enter an amount to withdraw [0 to cancel]: ");
       withdrawAmount = stdin.readLineSync();
 
       if (currentBal == 0) {
@@ -21,6 +21,9 @@ class controller {
         break;
       } else if (checkInvalidInput(withdrawAmount)) {
         print("Integers only!");
+      } else if (int.parse(withdrawAmount) == 0) {
+        print("You have cancelled your transaction");
+        return currentBal;
       } else if (int.parse(withdrawAmount!) < 100) {
         print("100 is the minimum amount that can be withdraw");
       } else if (int.parse(withdrawAmount) > currentBal) {
@@ -40,13 +43,16 @@ class controller {
     var updatedBal;
 
     do {
-      stdout.write("Enter an amount to deposit: ");
+      stdout.write("Enter an amount to deposit [0 to cancel]: ");
       depositAmount = stdin.readLineSync();
 
       if (checkInvalidInput(depositAmount)) {
         print("Integers only!");
-      } else if (int.parse(depositAmount) <= 0) {
+      } else if (int.parse(depositAmount) < 0) {
         print("Not a valid input!");
+      } else if (int.parse(depositAmount) == 0) {
+        print("You have cancelled your transaction");
+        return currentBal;
       } else {
         updatedBal = updateBalance(int.parse(depositAmount), currentBal);
         break;
