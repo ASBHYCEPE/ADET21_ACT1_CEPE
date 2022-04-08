@@ -70,10 +70,9 @@ void transacSection(controller control, userAccount account) {
         transac(currentBal, control);
         break;
     }
-
     account.setCurrentBal(currentBal);
-    account.updateUserAccount(account);
   } while (true);
+  account.updateUserAccount(account);
 }
 
 //Function for getting input
