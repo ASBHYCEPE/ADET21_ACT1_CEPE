@@ -20,7 +20,6 @@ class controller {
   //Function for changing pin
   void changePin(userAccount account) {
     String currentPin = account.getPin();
-    String? newPin;
 
     do {
       print("----------------");
@@ -31,7 +30,7 @@ class controller {
       String? getCurrentPin = stdin.readLineSync();
 
       stdout.write("Enter your new pin: ");
-      newPin = stdin.readLineSync();
+      String? newPin = stdin.readLineSync();
 
       if (newPin == currentPin) {
         print("You cannot use your current pin as your new pin");
