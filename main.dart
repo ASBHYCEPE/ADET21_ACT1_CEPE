@@ -37,7 +37,7 @@ void loginSection(controller control, userAccount account) {
 }
 
 void transacSection(controller control, userAccount account) {
-  bankTransac transac;
+  var transac;
   var choice;
   var currentBal = account.getCurrentBal();
 
@@ -47,16 +47,23 @@ void transacSection(controller control, userAccount account) {
     print("----------------------------");
     print("- CHOOSE AN ACTION          ");
     print("----------------------------");
-    print("- [1] WITHDRAW  [2]DEPOSIT -");
+    print("- [1] WITHDRAW             -");
+    print("- [2] DEPOSIT              -");
     print("- [3] VIEW BALANCE         -");
+    print("- [4] CHANGE PIN           -");
+    print("- [5] EXIT                 -");
     print("----------------------------");
 
     choice = getChoice();
 
-    if (choice == 4) {
+    if (choice == 5) {
       break;
     } else {
-      transac = bankTransacType(choice);
+      if (choice > 4) {
+        transac = bankTransacType(choice);
+      } else {
+        transac = changePin;
+      }
     }
 
     switch (transac) {
@@ -69,7 +76,11 @@ void transacSection(controller control, userAccount account) {
       case viewBalance:
         transac(currentBal, control);
         break;
+      case changePin:
+        transac(control, account);
+        break;
     }
+
     account.setCurrentBal(currentBal);
   } while (true);
   account.updateUserAccount(account);
@@ -104,7 +115,7 @@ bankTransac bankTransacType(var choice) {
 //Function for checking invalid inputs
 bool checkInvalidInput(var choice) {
   if (int.tryParse(choice ?? "") == null ||
-      int.parse(choice) > 4 ||
+      int.parse(choice) > 5 ||
       int.parse(choice) <= 0) {
     return true;
   } else {
@@ -120,3 +131,8 @@ withdraw(var currentBal, controller control) => control.withdraw(currentBal);
 
 viewBalance(var currentBal, controller control) =>
     control.viewBalance(currentBal);
+
+typedef accountAction(controller control, userAccount account);
+
+changePin(controller control, userAccount account) =>
+    control.changePin(account);
