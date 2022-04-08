@@ -45,10 +45,10 @@ void transacSection(controller control, userAccount account) {
     print("----------------------------");
     print("- Automated Teller Machine -");
     print("----------------------------");
-    print("  Current Balance: $currentBal");
+    print("- CHOOSE AN ACTION          ");
     print("----------------------------");
     print("- [1] WITHDRAW  [2]DEPOSIT -");
-    print("- [3] EXIT                 -");
+    print("- [3] VIEW BALANCE         -");
     print("----------------------------");
 
     choice = getChoice();
