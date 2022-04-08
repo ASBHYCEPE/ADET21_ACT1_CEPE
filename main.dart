@@ -53,7 +53,7 @@ void transacSection(controller control, userAccount account) {
 
     choice = getChoice();
 
-    if (choice == 3) {
+    if (choice == 4) {
       break;
     } else {
       transac = transacType(choice);
@@ -65,6 +65,9 @@ void transacSection(controller control, userAccount account) {
         break;
       case deposit:
         currentBal = transac(currentBal, control);
+        break;
+      case viewBalance:
+        transac(currentBal, control);
         break;
     }
 
@@ -92,14 +95,16 @@ int getChoice() {
 bankTransac transacType(var choice) {
   if (choice == 1) {
     return withdraw;
-  } else {
+  } else if (choice == 2) {
     return deposit;
+  } else {
+    return viewBalance;
   }
 }
 
 //Function for checking invalid inputs
 bool checkInvalidInput(var choice) {
-  if (int.tryParse(choice ?? "") == null || int.parse(choice) > 3) {
+  if (int.tryParse(choice ?? "") == null || int.parse(choice) > 4) {
     return true;
   } else {
     return false;
@@ -111,3 +116,6 @@ typedef bankTransac(var currentBal, controller control);
 deposit(var currentBal, controller control) => control.deposit(currentBal);
 
 withdraw(var currentBal, controller control) => control.withdraw(currentBal);
+
+viewBalance(var currentBal, controller control) =>
+    control.viewBalance(currentBal);
