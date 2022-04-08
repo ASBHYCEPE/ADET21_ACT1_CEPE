@@ -17,6 +17,11 @@ class controller {
     }
   }
 
+  //Function for viewing account balance
+  void viewBalance(var currentBal) {
+    print("Your current balance is $currentBal");
+  }
+
   // Fucntion for withdrawing operation
   int withdraw(var currentBal) {
     var withdrawAmount;
