@@ -56,7 +56,7 @@ void transacSection(controller control, userAccount account) {
     if (choice == 4) {
       break;
     } else {
-      transac = transacType(choice);
+      transac = bankTransacType(choice);
     }
 
     switch (transac) {
@@ -92,7 +92,7 @@ int getChoice() {
 }
 
 // Returns the defined function under typeddef bankTransac
-bankTransac transacType(var choice) {
+bankTransac bankTransacType(var choice) {
   if (choice == 1) {
     return withdraw;
   } else if (choice == 2) {
@@ -104,7 +104,9 @@ bankTransac transacType(var choice) {
 
 //Function for checking invalid inputs
 bool checkInvalidInput(var choice) {
-  if (int.tryParse(choice ?? "") == null || int.parse(choice) > 4) {
+  if (int.tryParse(choice ?? "") == null ||
+      int.parse(choice) > 4 ||
+      int.parse(choice) <= 0) {
     return true;
   } else {
     return false;
