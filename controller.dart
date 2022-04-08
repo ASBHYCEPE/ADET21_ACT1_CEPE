@@ -17,6 +17,37 @@ class controller {
     }
   }
 
+  //Function for changing pin
+  void changePin(userAccount account) {
+    String currentPin = account.getPin();
+    String newPin;
+
+    do {
+      print("----------------");
+      print("- PIN CHANGING -");
+      print("----------------");
+
+      stdout.write("Enter your current pin: ");
+      String? getCurrentPin = stdin.readLineSync();
+
+      stdout.write("Enter your new pin: ");
+      String? newPin = stdin.readLineSync();
+
+      if (newPin == currentPin) {
+        print("You cannot use your current pin as your new pin");
+      } else if (newPin!.contains(new RegExp(r'[A-Za-z]'))) {
+        print("You must enter a 6 digit pin");
+      } else if (newPin.length > 6 || newPin.length < 6) {
+        print("You must enter a 6 digit pin");
+      } else if (getCurrentPin != currentPin) {
+        print("Please ensure you entered your current pin correctly");
+      } else {
+        account.setPin(newPin);
+        return;
+      }
+    } while (true);
+  }
+
   //Function for viewing account balance
   void viewBalance(var currentBal) {
     print("Your current balance is $currentBal");
