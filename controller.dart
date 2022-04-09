@@ -48,7 +48,8 @@ class controller {
   }
 
   //Function for viewing account balance
-  void viewBalance(var currentBal) {
+  void viewBalance(userAccount account) {
+    var currentBal = account.getCurrentBal();
     print("Your current balance is $currentBal");
   }
 
