@@ -123,7 +123,7 @@ bool checkInvalidInput(var choice) {
   }
 }
 
-typedef bankTransac(userAccount account, controller control);
+typedef atmAction(userAccount account, controller control);
 
 deposit(userAccount account, controller control) => control.deposit(account);
 
@@ -132,7 +132,5 @@ withdraw(userAccount account, controller control) => control.withdraw(account);
 viewBalance(userAccount account, controller control) =>
     control.viewBalance(account);
 
-typedef accountAction(controller control, userAccount account);
-
-changePin(controller control, userAccount account) =>
+changePin(userAccount account, controller control) =>
     control.changePin(account);
