@@ -39,7 +39,7 @@ void loginSection(controller control, userAccount account) {
 void transacSection(controller control, userAccount account) {
   var transac;
   var choice;
-  var currentBal = account.getCurrentBal();
+  var currentBal;
 
   do {
     print("----------------------------");
@@ -123,14 +123,14 @@ bool checkInvalidInput(var choice) {
   }
 }
 
-typedef bankTransac(var currentBal, controller control);
+typedef bankTransac(userAccount account, controller control);
 
-deposit(var currentBal, controller control) => control.deposit(currentBal);
+deposit(userAccount account, controller control) => control.deposit(account);
 
-withdraw(var currentBal, controller control) => control.withdraw(currentBal);
+withdraw(userAccount account, controller control) => control.withdraw(account);
 
-viewBalance(var currentBal, controller control) =>
-    control.viewBalance(currentBal);
+viewBalance(userAccount account, controller control) =>
+    control.viewBalance(account);
 
 typedef accountAction(controller control, userAccount account);
 
