@@ -39,7 +39,6 @@ void loginSection(controller control, userAccount account) {
 void transacSection(controller control, userAccount account) {
   var transac;
   var choice;
-  var currentBal;
 
   do {
     print("----------------------------");
@@ -64,10 +63,10 @@ void transacSection(controller control, userAccount account) {
 
     switch (transac) {
       case withdraw:
-        currentBal = transac(account, control);
+        account.setCurrentBal(transac(account, control));
         break;
       case deposit:
-        currentBal = transac(account, control);
+        account.setCurrentBal(transac(account, control));
         break;
       case viewBalance:
         transac(account, control);
@@ -76,8 +75,6 @@ void transacSection(controller control, userAccount account) {
         transac(account, control);
         break;
     }
-
-    account.setCurrentBal(currentBal);
   } while (true);
   account.updateUserAccount(account);
 }
