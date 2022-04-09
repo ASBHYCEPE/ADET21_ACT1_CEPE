@@ -53,7 +53,8 @@ class controller {
   }
 
   // Fucntion for withdrawing operation
-  int withdraw(var currentBal) {
+  int withdraw(userAccount account) {
+    var currentBal = account.getCurrentBal();
     var withdrawAmount;
     var updatedBal;
 
@@ -83,7 +84,8 @@ class controller {
   }
 
   // Function for deposit operation
-  int deposit(var currentBal) {
+  int deposit(userAccount account) {
+    var currentBal = account.getCurrentBal();
     var depositAmount;
     var updatedBal;
 
