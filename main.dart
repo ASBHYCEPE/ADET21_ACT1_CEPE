@@ -59,25 +59,21 @@ void transacSection(controller control, userAccount account) {
     if (choice == 5) {
       break;
     } else {
-      if (choice > 4) {
-        transac = bankTransacType(choice);
-      } else {
-        transac = changePin;
-      }
+      transac = actionType(choice);
     }
 
     switch (transac) {
       case withdraw:
-        currentBal = transac(currentBal, control);
+        currentBal = transac(account, control);
         break;
       case deposit:
-        currentBal = transac(currentBal, control);
+        currentBal = transac(account, control);
         break;
       case viewBalance:
-        transac(currentBal, control);
+        transac(account, control);
         break;
       case changePin:
-        transac(control, account);
+        transac(account, control);
         break;
     }
 
@@ -101,14 +97,17 @@ int getChoice() {
   } while (true);
 }
 
-// Returns the defined function under typeddef bankTransac
-bankTransac bankTransacType(var choice) {
-  if (choice == 1) {
-    return withdraw;
-  } else if (choice == 2) {
-    return deposit;
-  } else {
-    return viewBalance;
+// Returns the defined function under typeddef atmAction
+atmAction actionType(var choice) {
+  switch (choice) {
+    case 1:
+      return withdraw;
+    case 2:
+      return deposit;
+    case 3:
+      return viewBalance;
+    default:
+      return changePin;
   }
 }
 
