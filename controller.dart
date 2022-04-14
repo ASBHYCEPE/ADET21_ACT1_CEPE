@@ -60,29 +60,24 @@ class controller {
     var updatedBal;
 
     do {
-      if (!chooseAccountType(account)) {
-        print("Account does not exist!");
-      } else {
-        stdout.write("Enter an amount to withdraw [0 to cancel]: ");
-        withdrawAmount = stdin.readLineSync();
+      stdout.write("Enter an amount to withdraw [0 to cancel]: ");
+      withdrawAmount = stdin.readLineSync();
 
-        if (currentBal == 0) {
-          print("You can't withdraw with a remaining balance of 0");
-          break;
-        } else if (checkInvalidInput(withdrawAmount)) {
-          print("Integers only!");
-        } else if (int.parse(withdrawAmount) == 0) {
-          print("You have cancelled your transaction");
-          return currentBal;
-        } else if (int.parse(withdrawAmount!) < 100) {
-          print("100 is the minimum amount that can be withdraw");
-        } else if (int.parse(withdrawAmount) > currentBal) {
-          print("You have exceeded the allowable amount that can be withdrawn");
-        } else {
-          updatedBal =
-              updateBalance(int.parse(withdrawAmount) * -1, currentBal);
-          break;
-        }
+      if (currentBal == 0) {
+        print("You can't withdraw with a remaining balance of 0");
+        break;
+      } else if (int.tryParse(withdrawAmount ?? "") == null) {
+        print("Integers only!");
+      } else if (int.parse(withdrawAmount) == 0) {
+        print("You have cancelled your transaction");
+        return currentBal;
+      } else if (int.parse(withdrawAmount!) < 100) {
+        print("100 is the minimum amount that can be withdraw");
+      } else if (int.parse(withdrawAmount) > currentBal) {
+        print("You have exceeded the allowable amount that can be withdrawn");
+      } else {
+        updatedBal = updateBalance(int.parse(withdrawAmount) * -1, currentBal);
+        break;
       }
     } while (true);
 
@@ -96,30 +91,28 @@ class controller {
     var updatedBal;
 
     do {
-      if (!chooseAccountType(account)) {
-        print("Account does not exist!");
-      } else {
-        stdout.write("Enter an amount to deposit [0 to cancel]: ");
-        depositAmount = stdin.readLineSync();
+      stdout.write("Enter an amount to deposit [0 to cancel]: ");
+      depositAmount = stdin.readLineSync();
 
-        if (checkInvalidInput(depositAmount)) {
-          print("Integers only!");
-        } else if (int.parse(depositAmount) < 0) {
-          print("Not a valid input!");
-        } else if (int.parse(depositAmount) == 0) {
-          print("You have cancelled your transaction");
-          return currentBal;
-        } else {
-          updatedBal = updateBalance(int.parse(depositAmount), currentBal);
-          break;
-        }
+      if (int.tryParse(depositAmount ?? "") == null) {
+        print("Integers only!");
+      } else if (int.parse(depositAmount) < 0) {
+        print("Not a valid input!");
+      } else if (int.parse(depositAmount) == 0) {
+        print("You have cancelled your transaction");
+        return currentBal;
+      } else {
+        updatedBal = updateBalance(int.parse(depositAmount), currentBal);
+        break;
       }
     } while (true);
 
     return updatedBal;
   }
 
-  bool chooseAccountType(userAccount account) {
+  void chooseAccountType(userAccount account) {
+    bool isContinue = false;
+
     do {
       print("-----------------------");
       print("-    ACCOUNT TYPES    -");
@@ -127,24 +120,23 @@ class controller {
       print(" [1] SAVINGS [2] CURRENT ");
       print("-----------------------");
       stdout.write("Enter account type: ");
-      var choose = stdin.readLineSync();
+      var choice = stdin.readLineSync();
 
-      if (checkInvalidInput(choose)) {
+      if (isInvalidChoice(choice, 2)) {
         print("Not a valid option!");
-      } else if (int.parse(choose!) > 2 || int.parse(choose) < 0) {
-        print("Not a valid option!");
-      } else if (int.parse(choose) == 1) {
-        return isExistingAccount(account, "savings");
+      } else if (int.parse(choice!) == 1) {
+        isContinue = isExistingAccount(account, "savings");
       } else {
-        return isExistingAccount(account, "current");
+        isContinue = isExistingAccount(account, "current");
       }
-    } while (true);
+    } while (!isContinue);
   }
 
   bool isExistingAccount(userAccount account, var accountType) {
     if (account.getAccountType() == accountType) {
       return true;
     } else {
+      print("Account does not exist");
       return false;
     }
   }
@@ -156,8 +148,10 @@ class controller {
   }
 
   //Function for checking invalid inputs
-  bool checkInvalidInput(var amount) {
-    if (int.tryParse(amount ?? "") == null) {
+  bool isInvalidChoice(var choice, var range) {
+    if (int.tryParse(choice ?? "") == null ||
+        int.parse(choice) > range ||
+        int.parse(choice) <= 0) {
       return true;
     } else {
       return false;
