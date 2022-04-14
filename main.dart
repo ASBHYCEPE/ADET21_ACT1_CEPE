@@ -7,8 +7,11 @@ void main(List<String> args) {
 
   var accountDetails = control.readUserAccount().split(' ');
 
-  userAccount account = new userAccount(accountDetails.elementAt(0),
-      accountDetails.elementAt(1), int.parse(accountDetails.elementAt(2)));
+  userAccount account = new userAccount(
+      accountDetails.elementAt(0),
+      accountDetails.elementAt(1),
+      int.parse(accountDetails.elementAt(2)),
+      accountDetails.elementAt(3));
 
   //User Account login
   loginSection(control, account);
