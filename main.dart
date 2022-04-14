@@ -67,12 +67,15 @@ void transacSection(controller control, userAccount account) {
 
     switch (transac) {
       case withdraw:
+        control.chooseAccountType(account);
         account.setCurrentBal(transac(account, control));
         break;
       case deposit:
+        control.chooseAccountType(account);
         account.setCurrentBal(transac(account, control));
         break;
       case viewBalance:
+        control.chooseAccountType(account);
         transac(account, control);
         break;
       case changePin:
