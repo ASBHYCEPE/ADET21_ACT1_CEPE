@@ -110,6 +110,36 @@ class controller {
     return updatedBal;
   }
 
+  bool chooseAccountType(userAccount account) {
+    do {
+      print("-----------------------");
+      print("-    ACCOUNT TYPES    -");
+      print("-----------------------");
+      print(" [1] SAVINGS [2] CURRENT ");
+      print("-----------------------");
+      stdout.write("Enter account type: ");
+      var choose = stdin.readLineSync();
+
+      if (checkInvalidInput(choose)) {
+        print("Not a valid option!");
+      } else if (int.parse(choose!) > 2 || int.parse(choose) < 0) {
+        print("Not a valid option!");
+      } else if (int.parse(choose) == 1) {
+        return isExistingAccount(account, "savings");
+      } else {
+        return isExistingAccount(account, "current");
+      }
+    } while (true);
+  }
+
+  bool isExistingAccount(userAccount account, var accountType) {
+    if (account.getAccountType() == accountType) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //Function for updating the balance
   int updateBalance(var amount, var currentBal) {
     var updatedBal = amount + currentBal;
