@@ -29,7 +29,9 @@ class userAccount {
         ' ' +
         account.pin +
         ' ' +
-        account.currentBal.toString();
+        account.currentBal.toString() +
+        ' ' +
+        account.accountType;
 
     var file = File('dbAccount.txt');
     var sink = file.openWrite();
