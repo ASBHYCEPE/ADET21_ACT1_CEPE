@@ -7,11 +7,12 @@ void main(List<String> args) {
 
   var accountDetails = control.readUserAccount().split(' ');
 
-  userAccount account = new userAccount(
-      accountDetails.elementAt(0),
-      accountDetails.elementAt(1),
-      int.parse(accountDetails.elementAt(2)),
-      accountDetails.elementAt(3));
+  String userName = accountDetails.elementAt(0);
+  String pin = accountDetails.elementAt(1);
+  int currentBal = int.parse(accountDetails.elementAt(2));
+  String accountType = accountDetails.elementAt(3);
+
+  userAccount account = new userAccount(userName, pin, currentBal, accountType);
 
   //User Account login
   loginSection(control, account);
