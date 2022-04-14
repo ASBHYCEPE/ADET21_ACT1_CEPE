@@ -60,24 +60,29 @@ class controller {
     var updatedBal;
 
     do {
-      stdout.write("Enter an amount to withdraw [0 to cancel]: ");
-      withdrawAmount = stdin.readLineSync();
-
-      if (currentBal == 0) {
-        print("You can't withdraw with a remaining balance of 0");
-        break;
-      } else if (checkInvalidInput(withdrawAmount)) {
-        print("Integers only!");
-      } else if (int.parse(withdrawAmount) == 0) {
-        print("You have cancelled your transaction");
-        return currentBal;
-      } else if (int.parse(withdrawAmount!) < 100) {
-        print("100 is the minimum amount that can be withdraw");
-      } else if (int.parse(withdrawAmount) > currentBal) {
-        print("You have exceeded the allowable amount that can be withdrawn");
+      if (!chooseAccountType(account)) {
+        print("Account does not exist!");
       } else {
-        updatedBal = updateBalance(int.parse(withdrawAmount) * -1, currentBal);
-        break;
+        stdout.write("Enter an amount to withdraw [0 to cancel]: ");
+        withdrawAmount = stdin.readLineSync();
+
+        if (currentBal == 0) {
+          print("You can't withdraw with a remaining balance of 0");
+          break;
+        } else if (checkInvalidInput(withdrawAmount)) {
+          print("Integers only!");
+        } else if (int.parse(withdrawAmount) == 0) {
+          print("You have cancelled your transaction");
+          return currentBal;
+        } else if (int.parse(withdrawAmount!) < 100) {
+          print("100 is the minimum amount that can be withdraw");
+        } else if (int.parse(withdrawAmount) > currentBal) {
+          print("You have exceeded the allowable amount that can be withdrawn");
+        } else {
+          updatedBal =
+              updateBalance(int.parse(withdrawAmount) * -1, currentBal);
+          break;
+        }
       }
     } while (true);
 
@@ -91,19 +96,23 @@ class controller {
     var updatedBal;
 
     do {
-      stdout.write("Enter an amount to deposit [0 to cancel]: ");
-      depositAmount = stdin.readLineSync();
-
-      if (checkInvalidInput(depositAmount)) {
-        print("Integers only!");
-      } else if (int.parse(depositAmount) < 0) {
-        print("Not a valid input!");
-      } else if (int.parse(depositAmount) == 0) {
-        print("You have cancelled your transaction");
-        return currentBal;
+      if (!chooseAccountType(account)) {
+        print("Account does not exist!");
       } else {
-        updatedBal = updateBalance(int.parse(depositAmount), currentBal);
-        break;
+        stdout.write("Enter an amount to deposit [0 to cancel]: ");
+        depositAmount = stdin.readLineSync();
+
+        if (checkInvalidInput(depositAmount)) {
+          print("Integers only!");
+        } else if (int.parse(depositAmount) < 0) {
+          print("Not a valid input!");
+        } else if (int.parse(depositAmount) == 0) {
+          print("You have cancelled your transaction");
+          return currentBal;
+        } else {
+          updatedBal = updateBalance(int.parse(depositAmount), currentBal);
+          break;
+        }
       }
     } while (true);
 
